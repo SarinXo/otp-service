@@ -17,4 +17,5 @@ public class UuidStringValidator implements ConstraintValidator<UuidString, Stri
 
         return value.matches(UUID_PATTERN);
     }
+
 }

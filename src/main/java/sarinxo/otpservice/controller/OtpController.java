@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sarinxo.otpservice.dto.CheckRequest;
 import sarinxo.otpservice.dto.GenerateRequest;
+import sarinxo.otpservice.dto.common.RequestWrapper;
 
 @Slf4j
 @RestController
@@ -17,12 +18,12 @@ import sarinxo.otpservice.dto.GenerateRequest;
 public class OtpController {
 
     @PostMapping("/generateAndSend")
-    public void generateAndSend(@RequestBody @Valid GenerateRequest generateRequest) {
+    public void generateAndSend(@RequestBody @Valid RequestWrapper<GenerateRequest> request) {
 
     }
 
     @PostMapping("/check")
-    public void check(@RequestBody @Valid CheckRequest checkRequest) {
+    public void check(@RequestBody @Valid RequestWrapper<CheckRequest> request) {
 
     }
 
