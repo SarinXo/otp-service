@@ -1,0 +1,95 @@
+databaseChangeLog:
+  - changeSet:
+      id: 02_create_send_otp_table.yml
+      author: SarinXo
+      changes:
+        - createTable:
+            tableName: send_otp
+            remarks: Таблица информации о сгенерированном пароле и статусе его отправки
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: process_id
+                  type: VARCHAR
+                  remarks: Идентификатор процесса в рамках которого запрашивается одноразовый пароль
+
+              - column:
+                  name: telegram_chat_id
+                  type: VARCHAR
+                  remarks: Идентификатор телеграм чата
+
+              - column:
+                  name: message
+                  type: VARCHAR
+                  remarks: Текст сообщения
+
+              - column:
+                  name: length
+                  type: INT
+                  remarks: Длина одноразового пароля
+
+              - column:
+                  name: ttl
+                  type: INT
+                  remarks: Время жизни одноразового пароля
+
+              - column:
+                  name: resend_attempts
+                  type: INT
+                  remarks: Количество возможных повторных отправок кода
+
+              - column:
+                  name: resend_timeout
+                  type: INT
+                  remarks: Таймаут перед повторным запросом кода, в секундах
+
+              - column:
+                  name: salt
+                  type: VARCHAR
+                  remarks: Соль одноразового пароля
+
+              - column:
+                  name: send_message_key
+                  type: VARCHAR
+                  remarks: Идентификатор сообщения, отправляемого во внешнюю систему
+
+              - column:
+                  name: status
+                  type: VARCHAR
+                  remarks: Статус отправки сообщения
+
+              - column:
+                  name: send_time
+                  type: TIMESTAMP WITH TIME ZONE
+                  remarks: Время отправки одноразового пароля
+
+              # Auditable fields
+              - column:
+                  name: create_user
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: last_update_user
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: create_time
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: last_update_time
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false

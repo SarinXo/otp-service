@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01_create_check_otp_table.yml
+      author: SarinXo
+      changes:
+        - createTable:
+            tableName: check_otp
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  remarks: Таблица данных о проверке одноразового пароля
+
+              - column:
+                  name: process_id
+                  type: VARCHAR
+                  remarks: Идентификатор процесса в рамках которого запрашивается одноразовый пароль
+
+              - column:
+                  name: otp
+                  type: VARCHAR
+                  remarks: Введенный клиентом код
+
+              - column:
+                  name: check_time
+                  type: TIMESTAMP WITH TIME ZONE
+                  remarks: Время проверки
+
+              - column:
+                  name: correct
+                  type: BOOLEAN
+                  remarks: Признак корректности введенного пароля
+
+              # AuditableEntity fields
+              - column:
+                  name: create_user
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: last_update_user
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: create_time
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: last_update_time
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
