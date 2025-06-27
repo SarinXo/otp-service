@@ -16,6 +16,7 @@ import sarinxo.otpservice.entity.base.AuditableEntity;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+import static sarinxo.otpservice.common.AppConstant.APP_DATABASE_SCHEMA;
 import static sarinxo.otpservice.entity.SendOtpEntity.TABLE_NAME;
 
 @Getter
@@ -23,9 +24,12 @@ import static sarinxo.otpservice.entity.SendOtpEntity.TABLE_NAME;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = TABLE_NAME)
+@Table(name = TABLE_NAME, schema = APP_DATABASE_SCHEMA)
 public class SendOtpEntity extends AuditableEntity {
 
+    /**
+     * Таблица информации о сгенерированном пароле и статусе его отправки
+     */
     public static final String TABLE_NAME = "send_otp";
 
     @Id

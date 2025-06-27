@@ -14,6 +14,7 @@ import sarinxo.otpservice.entity.base.AuditableEntity;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+import static sarinxo.otpservice.common.AppConstant.APP_DATABASE_SCHEMA;
 import static sarinxo.otpservice.entity.CheckOtpEntity.TABLE_NAME;
 
 @Getter
@@ -21,9 +22,12 @@ import static sarinxo.otpservice.entity.CheckOtpEntity.TABLE_NAME;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = TABLE_NAME)
+@Table(name = TABLE_NAME, schema = APP_DATABASE_SCHEMA)
 public class CheckOtpEntity extends AuditableEntity {
 
+    /**
+     * Таблица данных о проверке одноразового пароля
+     */
     public final static String TABLE_NAME = "check_otp";
 
     @Id
