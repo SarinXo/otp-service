@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
+import sarinxo.otpservice.validation.UuidString;
 
 @Data
 @Builder
@@ -15,6 +16,12 @@ import org.hibernate.validator.constraints.Range;
 @AllArgsConstructor
 public class GenerateRequest {
 
+    /**
+     * Идентификатор процесса в рамках которого запрашивается одноразовый пароль
+     */
+    @UuidString(message = "Incorrect 'processId' UUID format")
+    @NotNull(message = "Field 'processId' can't be null")
+    private String processId;
     /**
      * Идентификатор телеграмм чата
      */
