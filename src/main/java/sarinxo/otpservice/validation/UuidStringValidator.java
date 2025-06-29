@@ -18,4 +18,12 @@ public class UuidStringValidator implements ConstraintValidator<UuidString, Stri
         return value.matches(UUID_PATTERN);
     }
 
+    public boolean isValid(String value) {
+        if (value == null) {
+            return true;
+        }
+
+        return value.matches(UUID_PATTERN);
+    }
+
 }

@@ -7,8 +7,8 @@ public record ResponseWrapper<T>(
         T body
 ) {
 
-    public static <T> ResponseWrapper<T> of(T body) {
-        return new ResponseWrapper<>(UUID.randomUUID(), body);
+    public static <T> ResponseWrapper<T> of(UUID id, T body) {
+        return new ResponseWrapper<>(id, body);
     }
 
 }

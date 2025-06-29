@@ -5,19 +5,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.MDC;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import sarinxo.otpservice.validation.UuidString;
+import sarinxo.otpservice.validation.UuidStringValidator;
 
 import java.io.IOException;
-import java.util.Set;
 import java.util.UUID;
 
 import static sarinxo.otpservice.constant.RequestConstant.REQUEST_ID;
@@ -27,7 +22,7 @@ import static sarinxo.otpservice.constant.RequestConstant.REQUEST_ID;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class RequestIdFilter extends HttpFilter {
 
-    private final Validator validator;
+    private final UuidStringValidator validator;
 
     /**
      * Помещает requestId в ThreadLocal доступный в течение запроса.
@@ -50,15 +45,16 @@ public class RequestIdFilter extends HttpFilter {
 
     /**
      * Возвращает requestId из запроса. При невалидном requestId или его отсутствии создает новый requestId.
+     *
      * @param request Запрос к сервису
      * @return UUID строка. Гарантируется правильный формат.
      */
     private String getRequestId(HttpServletRequest request) {
         String requestId = request.getHeader("X-REQUEST-ID");
 
-        Set<ConstraintViolation<String>> validationResult = validator.validate(requestId, UuidString.class);
-        if (!validationResult.isEmpty()) {
+        if (requestId == null || !validator.isValid(requestId)) {
             requestId = UUID.randomUUID().toString();
+            return requestId;
         }
 
         return requestId;

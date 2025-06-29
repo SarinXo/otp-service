@@ -24,9 +24,9 @@ public class GlobalExceptionHandler {
         LocalDateTime timestamp = LocalDateTime.now();
         String exceptionMessage = e.getMessage();
 
-        DefaultExceptionDto body = new DefaultExceptionDto(requestId, timestamp, exceptionMessage);
+        DefaultExceptionDto body = new DefaultExceptionDto(timestamp, exceptionMessage);
 
-        return ResponseWrapper.of(body);
+        return ResponseWrapper.of(requestId, body);
     }
 
 }
