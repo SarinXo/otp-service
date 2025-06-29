@@ -9,26 +9,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.proxy.HibernateProxy;
 import sarinxo.otpservice.entity.base.AuditableEntity;
 
 import java.time.OffsetDateTime;
+import java.util.Objects;
 import java.util.UUID;
-
-import static sarinxo.otpservice.common.AppConstant.APP_DATABASE_SCHEMA;
-import static sarinxo.otpservice.entity.CheckOtpEntity.TABLE_NAME;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = TABLE_NAME, schema = APP_DATABASE_SCHEMA)
+@Table(name = "check_otp", schema = "otp")
 public class CheckOtpEntity extends AuditableEntity {
-
-    /**
-     * Таблица данных о проверке одноразового пароля
-     */
-    public final static String TABLE_NAME = "check_otp";
 
     @Id
     @UuidGenerator
@@ -52,5 +46,27 @@ public class CheckOtpEntity extends AuditableEntity {
      * Признак корректности введенного пароля
      */
     private Boolean correct;
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy
+                ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass()
+                : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy
+                ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass()
+                : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        CheckOtpEntity that = (CheckOtpEntity) o;
+        return getId() != null && Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public final int hashCode() {
+        return this instanceof HibernateProxy
+                ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode()
+                : getClass().hashCode();
+    }
 
 }

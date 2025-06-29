@@ -5,14 +5,13 @@ databaseChangeLog:
       changes:
         - createTable:
             tableName: check_otp
+            remarks: Таблица данных о проверке одноразового пароля
             columns:
               - column:
                   name: id
                   type: UUID
                   constraints:
                     primaryKey: true
-                    nullable: false
-                  remarks: Таблица данных о проверке одноразового пароля
 
               - column:
                   name: process_id
