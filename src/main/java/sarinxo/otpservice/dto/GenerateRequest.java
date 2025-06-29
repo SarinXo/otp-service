@@ -23,10 +23,17 @@ public class GenerateRequest {
     @NotNull(message = "Field 'processId' can't be null")
     private String processId;
     /**
-     * Идентификатор телеграмм чата
+     * Канал отправки сообщения
      */
-    @NotBlank(message = "Field 'telegramChatId' can't be blank")
-    private String telegramChatId;
+    @NotNull(message = "Field 'sendingChannel' can't be null")
+    private SendingChanel sendingChannel;
+    /**
+     * Идентификатор телеграмм чата.
+     * Зависит от поля 'sendingChannel'.
+     * Если канал выбран как консоль, то значение игнорируется.
+     */
+    @NotBlank(message = "Field 'target' can't be blank")
+    private String target;
     /**
      * Текст сообщения (с плейсхолдером '%s')
      */
