@@ -20,7 +20,11 @@ databaseChangeLog:
                   remarks: Идентификатор процесса в рамках которого запрашивается одноразовый пароль
 
               - column:
-                  name: telegram_chat_id
+                  name: sending_channel
+                  type: VARCHAR
+
+              - column:
+                  name: target
                   type: VARCHAR
                   remarks: Идентификатор телеграм чата
 
@@ -66,7 +70,7 @@ databaseChangeLog:
 
               - column:
                   name: send_time
-                  type: TIMESTAMP WITH TIME ZONE
+                  type: TIMESTAMP
                   remarks: Время отправки одноразового пароля
 
               # Auditable fields
@@ -84,12 +88,12 @@ databaseChangeLog:
 
               - column:
                   name: create_time
-                  type: TIMESTAMP WITH TIME ZONE
+                  type: TIMESTAMP
                   constraints:
                     nullable: false
 
               - column:
                   name: last_update_time
-                  type: TIMESTAMP WITH TIME ZONE
+                  type: TIMESTAMP
                   constraints:
                     nullable: false

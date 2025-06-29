@@ -25,7 +25,7 @@ databaseChangeLog:
 
               - column:
                   name: check_time
-                  type: TIMESTAMP WITH TIME ZONE
+                  type: TIMESTAMP
                   remarks: Время проверки
 
               - column:
@@ -48,12 +48,12 @@ databaseChangeLog:
 
               - column:
                   name: create_time
-                  type: TIMESTAMP WITH TIME ZONE
+                  type: TIMESTAMP
                   constraints:
                     nullable: false
 
               - column:
                   name: last_update_time
-                  type: TIMESTAMP WITH TIME ZONE
+                  type: TIMESTAMP
                   constraints:
                     nullable: false

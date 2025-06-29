@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import sarinxo.otpservice.common.AppConstant;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Getter
@@ -29,24 +30,24 @@ public class AuditableEntity {
      * Дата создания записи
      */
     @Column(name = "create_time", nullable = false, updatable = false)
-    private OffsetDateTime createTime;
+    private LocalDateTime createTime;
     /**
      * Дата последнего обновления записи
      */
     @Column(name = "last_update_time", nullable = false)
-    private OffsetDateTime lastUpdateTime;
+    private LocalDateTime lastUpdateTime;
 
     @PrePersist
     public void prePersist() {
         createUser = AppConstant.APP_NAME;
         lastUpdateUser = AppConstant.APP_NAME;
-        createTime = OffsetDateTime.now();
-        lastUpdateTime = OffsetDateTime.now();
+        createTime = LocalDateTime.now();
+        lastUpdateTime = LocalDateTime.now();
     }
 
     @PreUpdate
     public void preUpdate() {
-        lastUpdateTime = OffsetDateTime.now();
+        lastUpdateTime = LocalDateTime.now();
         lastUpdateUser = AppConstant.APP_NAME;
     }
 

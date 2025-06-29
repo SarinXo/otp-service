@@ -14,6 +14,7 @@ import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.proxy.HibernateProxy;
 import sarinxo.otpservice.entity.base.AuditableEntity;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -35,10 +36,15 @@ public class SendOtpEntity extends AuditableEntity {
     @Column(name = "process_id")
     private String processId;
     /**
-     * Идентификатор телеграм чата
+     * Канал отправки
      */
-    @Column(name = "telegram_chat_id")
-    private String telegramChatId;
+    @Column(name = "sending_channel")
+    @Enumerated(EnumType.STRING)
+    private SendingChannel sendingChannel;
+    /**
+     * Адрес, куда будет выполнена отправка в канале
+     */
+    private String target;
     /**
      * Текст сообщения
      */
@@ -62,9 +68,10 @@ public class SendOtpEntity extends AuditableEntity {
     @Column(name = "resend_timeout")
     private Integer resendTimeout;
     /**
-     * Соль одноразового пароля
+     * Зашифрованный одноразовый пароль
      */
-    private String salt;
+    @Column(name = "encoded_otp")
+    private String encodedOtp;
     /**
      * Идентификатор сообщения, отправляемого во внешнюю систему
      */
@@ -79,14 +86,7 @@ public class SendOtpEntity extends AuditableEntity {
      * Время отправки одноразового пароля
      */
     @Column(name = "send_time")
-    private OffsetDateTime sendTime;
-
-    /**
-     * Статус отправки сообщения
-     */
-    public enum MessageStatus {
-        IN_PROCESS, DELIVERED, ERROR
-    }
+    private LocalDateTime sendTime;
 
     @Override
     public final boolean equals(Object o) {
@@ -108,6 +108,20 @@ public class SendOtpEntity extends AuditableEntity {
         return this instanceof HibernateProxy
                 ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode()
                 : getClass().hashCode();
+    }
+
+    /**
+     * Статус отправки сообщения
+     */
+    public enum MessageStatus {
+        IN_PROCESS, DELIVERED, ERROR
+    }
+
+    /**
+     * Канал отправки сообщения
+     */
+    public enum SendingChannel {
+        TELEGRAM, CONSOLE;
     }
 
 }

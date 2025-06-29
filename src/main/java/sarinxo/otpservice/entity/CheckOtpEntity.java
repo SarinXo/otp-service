@@ -12,6 +12,7 @@ import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.proxy.HibernateProxy;
 import sarinxo.otpservice.entity.base.AuditableEntity;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -41,7 +42,7 @@ public class CheckOtpEntity extends AuditableEntity {
      * Время проверки
      */
     @Column(name = "check_time")
-    private OffsetDateTime checkTime;
+    private LocalDateTime checkTime;
     /**
      * Признак корректности введенного пароля
      */
