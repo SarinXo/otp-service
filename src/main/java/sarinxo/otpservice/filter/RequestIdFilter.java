@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.UUID;
 
+import static sarinxo.otpservice.constant.RequestConstant.REQUEST_ID;
+
 @Component
 @RequiredArgsConstructor
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -38,7 +40,7 @@ public class RequestIdFilter extends HttpFilter {
     ) throws IOException, ServletException {
         try {
             String requestUuid = getRequestId(request);
-            MDC.put("requestId", requestUuid);
+            MDC.put(REQUEST_ID, requestUuid);
 
             super.doFilter(request, response, chain);
         } finally {

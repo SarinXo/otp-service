@@ -4,9 +4,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
 public record RequestWrapper<T>(
-        /*
-         * Тело запроса
-         */
         @Valid
         @NotNull(message = "Field 'body' can't be null")
         T body
