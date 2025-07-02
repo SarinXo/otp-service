@@ -21,3 +21,9 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/db.changelog-master.yml
+
+
+server:
+  servlet:
+    context-path: /otp/api/v1/otp
+
