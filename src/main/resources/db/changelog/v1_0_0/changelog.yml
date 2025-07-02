@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: develop/1.0.0
+      author: SarinXo
+      changes:
+        - tagDatabase:
+            tag: develop/1.0.0
+  - include:
+      file: 01_create_check_otp_table.yml
+      relativeToChangelogFile: true
+  - include:
+      file: 02_create_send_otp_table.yml
+      relativeToChangelogFile: true
