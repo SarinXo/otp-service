@@ -1,0 +1,6 @@
+otp-service:
+  datasource:
+    url: jdbc:postgresql://localhost:5454/otp-service
+    username: test
+    password: pswd
+    schema: app
