@@ -6,7 +6,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import lombok.Getter;
 import lombok.Setter;
-import sarinxo.otpservice.common.AppConstant;
+import sarinxo.otpservice.constant.AppConstant;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;

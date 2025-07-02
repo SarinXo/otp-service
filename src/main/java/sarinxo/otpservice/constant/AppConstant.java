@@ -1,4 +1,4 @@
-package sarinxo.otpservice.common;
+package sarinxo.otpservice.constant;
 
 public class AppConstant {
 
