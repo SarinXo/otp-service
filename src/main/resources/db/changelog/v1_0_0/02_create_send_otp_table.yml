@@ -54,7 +54,7 @@ databaseChangeLog:
                   remarks: Таймаут перед повторным запросом кода, в секундах
 
               - column:
-                  name: salt
+                  name: encoded_otp
                   type: VARCHAR
                   remarks: Соль одноразового пароля
 
