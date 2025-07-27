@@ -1,6 +1,26 @@
 otp-service:
+
   datasource:
     url: jdbc:postgresql://localhost:5454/otp-service
     username: test
     password: pswd
-    schema: app
+    schema: otp
+
+  kafka:
+    in-topic: Send.Otp.IN.V1
+    out-topic: Send.Otp.OUT.V1
+    send-otp:
+      enabled: true
+
+spring:
+
+  kafka:
+    bootstrap-servers: localhost:9391,localhost:9392,localhost:9393
+    consumer:
+      group-id: mdm-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
